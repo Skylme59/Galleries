@@ -68,30 +68,9 @@
                     <i class="fab fa-x-twitter"></i> @skylme
                 </a>
 
-                <!-- Bouton Share multi-réseaux -->
-                <div class="relative">
-                    <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold px-6 py-2 rounded-2xl flex items-center gap-2 hover:scale-105 transition">
-                        <i class="fas fa-share-alt"></i> Share
-                    </button>
-                    <div id="share-menu" class="hidden absolute right-0 mt-3 w-56 bg-zinc-950 border border-yellow-400/30 rounded-2xl shadow-2xl py-2 text-sm z-[100]">
-                        <a onclick="shareTo('x');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
-                            <i class="fab fa-x-twitter"></i> Twitter / X
-                        </a>
-                        <a onclick="shareTo('facebook');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
-                            <i class="fab fa-facebook"></i> Facebook
-                        </a>
-                        <a onclick="shareTo('telegram');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
-                            <i class="fab fa-telegram"></i> Telegram
-                        </a>
-                        <a onclick="shareTo('whatsapp');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                        <div class="border-t border-white/10 my-1"></div>
-                        <a onclick="copyLink();toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
-                            <i class="fas fa-copy"></i> Copier le lien
-                        </a>
-                    </div>
-                </div>
+                <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold px-6 py-2 rounded-2xl flex items-center gap-2 hover:scale-105 transition">
+                    <i class="fas fa-share-alt"></i> Share
+                </button>
 
                 <div class="relative">
                     <button onclick="toggleLangMenu()" class="text-3xl hover:text-yellow-400 transition">🌐</button>
@@ -215,23 +194,22 @@
             const url = "https://galleries-three.vercel.app";
             const text = "Discover Fallen Angels: MechFallen – my cyber-gothic NFT collection 🔥 @skylme";
 
-            if (network === 'x') {
-                window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
-            } else if (network === 'facebook') {
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-            } else if (network === 'telegram') {
-                window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
-            } else if (network === 'whatsapp') {
-                window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, '_blank');
-            }
+            if (network === 'x') window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            else if (network === 'facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            else if (network === 'telegram') window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+            else if (network === 'whatsapp') window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, '_blank');
         }
 
         function toggleLangMenu() { document.getElementById('lang-menu').classList.toggle('hidden'); }
+
         function changeLanguage(lang) {
             setTimeout(() => {
                 const select = document.querySelector('.goog-te-combo');
-                if (select) { select.value = lang; select.dispatchEvent(new Event('change')); }
-            }, 600);
+                if (select) {
+                    select.value = lang;
+                    select.dispatchEvent(new Event('change'));
+                }
+            }, 1200); // délai plus long pour que le widget ait le temps de charger
         }
 
         async function loadNFTs() {
@@ -250,6 +228,11 @@
                 document.getElementById('count').textContent = `${count} PIECES DISPLAYED`;
                 document.getElementById('total-count').textContent = count;
 
+                if (count === 0) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-12 text-yellow-300">Aucun NFT trouvé pour le moment...</div>`;
+                    return;
+                }
+
                 data.nfts.forEach(nft => {
                     const card = document.createElement('div');
                     card.className = 'card bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden cursor-pointer';
@@ -257,19 +240,9 @@
                         <div class="relative">
                             <img src="${nft.image_url}" class="w-full aspect-square object-cover" alt="${nft.name}">
                             <div class="absolute top-4 right-4 bg-black/80 text-yellow-400 text-xs px-3 py-1 rounded-full">#${nft.identifier}</div>
-                            
-                            <!-- Icônes réseaux sociaux sur chaque carte -->
-                            <div class="absolute bottom-4 right-4 flex gap-2">
-                                <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'x');" class="bg-black/70 hover:bg-white hover:text-black text-white p-2 rounded-full text-sm">
-                                    <i class="fab fa-x-twitter"></i>
-                                </button>
-                                <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'facebook');" class="bg-black/70 hover:bg-white hover:text-black text-white p-2 rounded-full text-sm">
-                                    <i class="fab fa-facebook"></i>
-                                </button>
-                                <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'telegram');" class="bg-black/70 hover:bg-white hover:text-black text-white p-2 rounded-full text-sm">
-                                    <i class="fab fa-telegram"></i>
-                                </button>
-                            </div>
+                            <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}');" class="absolute bottom-4 right-4 bg-black/70 hover:bg-yellow-400 hover:text-black text-white p-3 rounded-full">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
                         </div>
                         <div class="p-6">
                             <h3 class="font-medium text-lg">${nft.name || `MechFallen #${nft.identifier}`}</h3>
@@ -298,21 +271,13 @@
             `;
         }
         function closeModal() { document.getElementById('modal').classList.add('hidden'); }
-
-        function shareNFT(name, link, network) {
+        function shareNFT(name, link) {
             const text = `Just discovered "${name}" in the MechFallen collection 🔥 @skylme`;
-            if (network === 'x') {
-                window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`, '_blank');
-            } else if (network === 'facebook') {
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`, '_blank');
-            } else if (network === 'telegram') {
-                window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`, '_blank');
-            }
+            window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`, '_blank');
         }
-
         function shareCurrentNFT() {
             if (!currentNFT) return;
-            shareNFT(currentNFT.name || `MechFallen #${currentNFT.identifier}`, currentNFT.permalink, 'x');
+            shareNFT(currentNFT.name || `MechFallen #${currentNFT.identifier}`, currentNFT.permalink);
         }
 
         window.onload = loadNFTs;
