@@ -98,7 +98,7 @@
                 In the heart of a forgotten gothic cathedral, where stained glass has bled into dust and prayers have turned to rust, the angels fell...
             </p>
 
-            <!-- TA VIDÉO -->
+            <!-- VIDÉO -->
             <div class="hero-video">
                 <video autoplay muted loop playsinline controls class="w-full rounded-2xl">
                     <source src="https://raw.githubusercontent.com/Skylme59/Galleries/Assets/intro.mp4" type="video/mp4">
@@ -185,6 +185,8 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
+        const API_KEY = "7041390b2280408f977595d217eaa064";
+
         function shareSite() {
             const text = "Discover Fallen Angels: MechFallen – my cyber-gothic NFT collection 🔥 @skylme";
             const url = "https://galleries-three.vercel.app";
@@ -201,13 +203,15 @@
 
         async function loadNFTs() {
             const grid = document.getElementById('nft-grid');
-            grid.innerHTML = `<div class="col-span-full text-center py-12"><i class="fas fa-spinner fa-spin text-5xl text-yellow-400"></i><p class="mt-6">Loading the sacred abominations...</p></div>`;
+            grid.innerHTML = `<div class="col-span-full text-center py-12"><i class="fas fa-spinner fa-spin text-5xl text-yellow-400"></i><p class="mt-6">Loading NFTs with API Key...</p></div>`;
 
             const timestamp = Date.now();
             const url = `https://api.opensea.io/api/v2/collection/fallen-angels-mechfallen/nfts?limit=50&t=${timestamp}`;
 
             try {
-                const res = await fetch(url);
+                const res = await fetch(url, {
+                    headers: { "X-API-KEY": API_KEY }
+                });
                 const data = await res.json();
 
                 grid.innerHTML = '';
@@ -225,7 +229,7 @@
                     card.className = 'card bg-zinc-950 border border-white/10 rounded-2xl overflow-hidden cursor-pointer';
                     card.innerHTML = `
                         <div class="relative">
-                            <img src="${nft.image_url || nft.image_preview_url}" class="w-full aspect-square object-cover" alt="${nft.name}">
+                            <img src="${nft.image_url}" class="w-full aspect-square object-cover" alt="${nft.name}">
                             <div class="absolute top-4 right-4 bg-black/80 text-yellow-400 text-xs px-3 py-1 rounded-full">#${nft.identifier}</div>
                             <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}');" 
                                     class="absolute bottom-4 right-4 bg-black/70 hover:bg-yellow-400 hover:text-black text-white p-3 rounded-full">
@@ -240,7 +244,7 @@
                     grid.appendChild(card);
                 });
             } catch (e) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">OpenSea API is slow.<br>Refresh with Ctrl + Shift + R</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">Erreur API OpenSea.<br>Vérifie ta clé ou réessaie plus tard.</div>`;
             }
         }
 
@@ -249,7 +253,7 @@
             currentNFT = nft;
             document.getElementById('modal').classList.remove('hidden');
             document.getElementById('modal-content').innerHTML = `
-                <div class="md:w-2/3 bg-black p-4"><img src="${nft.image_url || nft.image_preview_url}" class="w-full rounded-2xl"></div>
+                <div class="md:w-2/3 bg-black p-4"><img src="${nft.image_url}" class="w-full rounded-2xl"></div>
                 <div class="md:w-1/3 p-8 flex flex-col">
                     <h3 class="text-3xl font-medium mb-2">${nft.name || `MechFallen #${nft.identifier}`}</h3>
                     <p class="text-yellow-400">#${nft.identifier}</p>
