@@ -68,9 +68,30 @@
                     <i class="fab fa-x-twitter"></i> @skylme
                 </a>
 
-                <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold px-6 py-2 rounded-2xl flex items-center gap-2 hover:scale-105 transition">
-                    <i class="fas fa-share-alt"></i> Share
-                </button>
+                <!-- Bouton Share jaune avec menu déroulant -->
+                <div class="relative">
+                    <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold px-6 py-2 rounded-2xl flex items-center gap-2 hover:scale-105 transition">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                    <div id="share-menu" class="hidden absolute right-0 mt-3 w-56 bg-zinc-950 border border-yellow-400/30 rounded-2xl shadow-2xl py-2 text-sm z-[100]">
+                        <a onclick="shareTo('x');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
+                            <i class="fab fa-x-twitter"></i> Twitter / X
+                        </a>
+                        <a onclick="shareTo('facebook');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </a>
+                        <a onclick="shareTo('telegram');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                        <a onclick="shareTo('whatsapp');toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <div class="border-t border-white/10 my-1"></div>
+                        <a onclick="copyLink();toggleShareMenu()" class="flex items-center gap-3 px-6 py-3 hover:bg-yellow-400 hover:text-black">
+                            <i class="fas fa-copy"></i> Copier le lien
+                        </a>
+                    </div>
+                </div>
 
                 <div class="relative">
                     <button onclick="toggleLangMenu()" class="text-3xl hover:text-yellow-400 transition">🌐</button>
@@ -203,13 +224,15 @@
         function toggleLangMenu() { document.getElementById('lang-menu').classList.toggle('hidden'); }
 
         function changeLanguage(lang) {
-            const select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = lang;
-                select.dispatchEvent(new Event('change'));
-            } else {
-                alert("Le widget de traduction est en train de charger.\nRéessayez dans 2 secondes.");
-            }
+            setTimeout(() => {
+                const select = document.querySelector('.goog-te-combo');
+                if (select) {
+                    select.value = lang;
+                    select.dispatchEvent(new Event('change'));
+                } else {
+                    alert("Le widget de traduction charge encore...\nRéessayez dans 2 secondes.");
+                }
+            }, 1500);
         }
 
         async function loadNFTs() {
@@ -241,7 +264,6 @@
                             <img src="${nft.image_url}" class="w-full aspect-square object-cover" alt="${nft.name}">
                             <div class="absolute top-4 right-4 bg-black/80 text-yellow-400 text-xs px-3 py-1 rounded-full">#${nft.identifier}</div>
                             
-                            <!-- Icônes réseaux sociaux sur chaque carte -->
                             <div class="absolute bottom-4 left-4 flex gap-2">
                                 <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'x');" class="bg-black/70 hover:bg-white hover:text-black text-white p-2 rounded-full">
                                     <i class="fab fa-x-twitter"></i>
