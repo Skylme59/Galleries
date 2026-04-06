@@ -68,7 +68,7 @@
                     <i class="fab fa-x-twitter"></i> @skylme
                 </a>
 
-                <button onclick="shareSite()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold px-6 py-2 rounded-2xl flex items-center gap-2 hover:scale-105 transition">
+                <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold px-6 py-2 rounded-2xl flex items-center gap-2 hover:scale-105 transition">
                     <i class="fas fa-share-alt"></i> Share
                 </button>
 
@@ -187,10 +187,25 @@
     <script>
         const API_KEY = "7041390b2280408f977595d217eaa064";
 
-        function shareSite() {
-            const text = "Discover Fallen Angels: MechFallen – my cyber-gothic NFT collection 🔥 @skylme";
+        function shareSite() { toggleShareMenu(); }
+
+        function toggleShareMenu() {
+            document.getElementById('share-menu').classList.toggle('hidden');
+        }
+
+        function shareTo(network) {
             const url = "https://galleries-three.vercel.app";
-            window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            const text = "Discover Fallen Angels: MechFallen – my cyber-gothic NFT collection 🔥 @skylme";
+
+            if (network === 'x') {
+                window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+            } else if (network === 'facebook') {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+            } else if (network === 'telegram') {
+                window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+            } else if (network === 'whatsapp') {
+                window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`, '_blank');
+            }
         }
 
         function toggleLangMenu() { document.getElementById('lang-menu').classList.toggle('hidden'); }
@@ -203,7 +218,7 @@
 
         async function loadNFTs() {
             const grid = document.getElementById('nft-grid');
-            grid.innerHTML = `<div class="col-span-full text-center py-12"><i class="fas fa-spinner fa-spin text-5xl text-yellow-400"></i><p class="mt-6">Loading NFTs with API Key...</p></div>`;
+            grid.innerHTML = `<div class="col-span-full text-center py-12"><i class="fas fa-spinner fa-spin text-5xl text-yellow-400"></i><p class="mt-6">Loading NFTs...</p></div>`;
 
             const timestamp = Date.now();
             const url = `https://api.opensea.io/api/v2/collection/fallen-angels-mechfallen/nfts?limit=50&t=${timestamp}`;
@@ -244,7 +259,7 @@
                     grid.appendChild(card);
                 });
             } catch (e) {
-                grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">Erreur API OpenSea.<br>Vérifie ta clé ou réessaie plus tard.</div>`;
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">OpenSea API is slow.<br>Refresh with Ctrl + Shift + R</div>`;
             }
         }
 
