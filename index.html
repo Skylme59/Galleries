@@ -208,8 +208,10 @@
                 if (select) {
                     select.value = lang;
                     select.dispatchEvent(new Event('change'));
+                } else {
+                    alert("Le widget de traduction n'est pas encore chargé. Rafraîchis la page et réessaie.");
                 }
-            }, 1200); // délai plus long pour que le widget ait le temps de charger
+            }, 1500); // délai plus long
         }
 
         async function loadNFTs() {
