@@ -38,12 +38,13 @@
         .hero-bg { background-image: url('https://raw.githubusercontent.com/Skylme59/Galleries/Assets/background.jpg'); background-size: cover; background-position: center; }
         .hero-video { max-width: 620px; margin: 50px auto 30px; border-radius: 16px; overflow: hidden; box-shadow: 0 0 50px rgba(255, 215, 0, 0.4); }
 
-        /* Menu déroulant Share - FIXÉ */
+        /* MENU DÉROULANT FIXÉ : ouvre vers le BAS */
         .share-popup { 
             display: none; 
             position: absolute; 
-            bottom: 48px; 
+            top: 100%; 
             right: 0; 
+            margin-top: 8px;
             background: #0e0e18; 
             border: 1px solid rgba(212,164,34,0.3); 
             border-radius: 12px; 
@@ -78,10 +79,16 @@
             <div class="hidden md:flex items-center gap-6 text-sm font-medium uppercase tracking-widest">
                 <a href="#gallery" class="text-gray-400 hover:text-[#f0c856]">Gallery</a>
                 <a href="#about" class="text-gray-400 hover:text-[#f0c856]">About</a>
-                <a href="https://opensea.io/collection/fallen-angels-mechfallen" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-[rgba(212,164,34,0.1)] border border-[rgba(212,164,34,0.15)] rounded-lg text-[#f0c856]">OpenSea</a>
+                
+                <!-- Bouton OpenSea avec effet artistique restauré -->
+                <a href="https://opensea.io/collection/fallen-angels-mechfallen" target="_blank" 
+                   class="flex items-center gap-2 px-4 py-2 bg-[rgba(212,164,34,0.1)] border border-[rgba(212,164,34,0.3)] rounded-lg text-[#f0c856] hover:bg-[rgba(212,164,34,0.2)] hover:border-[#d4a422] transition-all">
+                    <i class="fa-solid fa-sailboat"></i> OpenSea
+                </a>
+
                 <a href="https://x.com/skylme" target="_blank" class="text-gray-500 hover:text-[#f0c856]"><i class="fa-brands fa-x-twitter text-lg"></i></a>
 
-                <!-- Bouton Share + Menu déroulant FIXÉ -->
+                <!-- Bouton Share + Menu déroulant vers le BAS -->
                 <div class="relative">
                     <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-black font-bold px-5 py-2 rounded-xl flex items-center gap-2 hover:scale-105 transition-all">
                         <i class="fas fa-share-alt"></i> Share
@@ -101,9 +108,7 @@
         </div>
     </nav>
 
-    <!-- HERO + GALLERY + ABOUT + FOOTER (ton design complet) -->
-    <!-- (je garde tout ton beau design tel quel, seul le Share est corrigé) -->
-
+    <!-- HERO -->
     <section class="hero-bg min-h-screen flex items-center relative">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-[#050505]"></div>
         <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
