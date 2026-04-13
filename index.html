@@ -58,4 +58,160 @@
                 <img src="https://i2c.seadn.io/collection/fallen-angels-mechfallen/image_type_logo/fa5f37c8575d1fccc7e39fb59c715c/25fa5f37c8575d1fccc7e39fb59c715c.jpeg?h=250&w=250" alt="Logo" class="w-10 h-10 rounded-full border border-[#d4a422]">
                 <div>
                     <h1 class="font-cinzel text-base md:text-lg font-bold tracking-[3px] text-[#f0c856] uppercase">Fallen Angels</h1>
-                    <div class="font-orbit
+                    <div class="font-orbitron text-[0.5rem] text-gray-500 tracking-[4px] uppercase">MechFallen Collection</div>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium uppercase tracking-widest">
+                <a href="#gallery" class="text-gray-400 hover:text-[#f0c856] transition-colors">Gallery</a>
+                <a href="#about" class="text-gray-400 hover:text-[#f0c856] transition-colors">About</a>
+                <a href="https://opensea.io/collection/fallen-angels-mechfallen" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-[rgba(212,164,34,0.1)] border border-[rgba(212,164,34,0.15)] rounded-lg text-[#f0c856] hover:bg-[rgba(212,164,34,0.2)]">OpenSea</a>
+                <a href="https://x.com/skylme" target="_blank" class="text-gray-500 hover:text-[#f0c856]"><i class="fa-brands fa-x-twitter text-lg"></i></a>
+
+                <!-- Bouton Share jaune + menu déroulant -->
+                <div class="relative">
+                    <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-black font-bold px-5 py-2 rounded-xl flex items-center gap-2 hover:scale-105 transition-all">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                    <div id="share-menu" class="share-popup">
+                        <a onclick="shareTo('x');toggleShareMenu()" class="flex items-center gap-3 px-5 py-3 text-gray-400 hover:bg-[rgba(212,164,34,0.1)] hover:text-[#f0c856]"><i class="fab fa-x-twitter"></i> Twitter / X</a>
+                        <a onclick="shareTo('facebook');toggleShareMenu()" class="flex items-center gap-3 px-5 py-3 text-gray-400 hover:bg-[rgba(212,164,34,0.1)] hover:text-[#f0c856]"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a onclick="shareTo('telegram');toggleShareMenu()" class="flex items-center gap-3 px-5 py-3 text-gray-400 hover:bg-[rgba(212,164,34,0.1)] hover:text-[#f0c856]"><i class="fab fa-telegram"></i> Telegram</a>
+                        <a onclick="shareTo('whatsapp');toggleShareMenu()" class="flex items-center gap-3 px-5 py-3 text-gray-400 hover:bg-[rgba(212,164,34,0.1)] hover:text-[#f0c856]"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <div class="border-t border-white/10 my-1"></div>
+                        <a onclick="copyLink();toggleShareMenu()" class="flex items-center gap-3 px-5 py-3 text-gray-400 hover:bg-[rgba(212,164,34,0.1)] hover:text-[#f0c856]"><i class="fas fa-copy"></i> Copy Link</a>
+                    </div>
+                </div>
+
+                <a href="https://translate.google.com/translate?sl=en&tl=fr&u=https://galleries-three.vercel.app" target="_blank" class="text-3xl hover:text-[#f0c856]">🌐</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-bg min-h-screen flex items-center relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-[#050505]"></div>
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <p class="text-[#f0c856] text-xs md:text-sm tracking-[4px] mb-4 font-orbitron">POLYGON / DIGITAL ART / <span id="total-count">11</span> SACRED ABOMINATIONS</p>
+            <h1 class="title-font text-5xl md:text-7xl lg:text-8xl leading-none mb-1">Fallen Angels</h1>
+            <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#f0c856] via-[#d4a422] to-[#ff2244] neon-gold">MechFallen</h2>
+            <p class="max-w-2xl mx-auto mt-8 text-base md:text-lg text-gray-400">In the heart of a forgotten gothic cathedral...</p>
+
+            <div class="hero-video">
+                <video autoplay muted loop playsinline controls class="w-full rounded-2xl">
+                    <source src="https://raw.githubusercontent.com/Skylme59/Galleries/Assets/intro.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <a href="#gallery" class="inline-flex mt-8 px-10 py-4 bg-gradient-to-r from-[#d4a422] to-[#8a6a10] text-[#050508] font-bold tracking-widest">ENTER THE GALLERY</a>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="max-w-7xl mx-auto px-4 md:px-8 py-20">
+        <div class="text-center mb-4">
+            <h2 class="font-cinzel text-3xl md:text-5xl font-bold">The Gallery</h2>
+        </div>
+        <div class="flex justify-between items-center mb-10">
+            <p id="count" class="text-[#f0c856] text-sm font-orbitron">0 PIECES DISPLAYED</p>
+            <button onclick="loadNFTs()" class="text-xs bg-[rgba(212,164,34,0.1)] hover:bg-[#d4a422] hover:text-black px-4 py-2 rounded-lg">Refresh</button>
+        </div>
+        <div id="nft-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-20 border-t border-[rgba(212,164,34,0.08)]">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12">
+            <div>
+                <h2 class="font-cinzel text-4xl md:text-6xl font-bold">The Fall<br>Was Only<br>The Beginning</h2>
+            </div>
+            <div class="text-gray-400">
+                <p>In the heart of a forgotten gothic cathedral, where stained glass has bled into dust and prayers have turned to rust, the angels fell...</p>
+                <p>11 sacred abominations caught between heaven and hardware.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-[rgba(212,164,34,0.08)] text-center text-gray-500 text-sm">
+        © 2025 Fallen Angels: MechFallen • Built between heaven and hardware
+    </footer>
+
+    <script>
+        const API_KEY = "7041390b2280408f977595d217eaa064";
+
+        async function loadNFTs() {
+            const grid = document.getElementById('nft-grid');
+            const countEl = document.getElementById('count');
+            const totalEl = document.getElementById('total-count');
+
+            grid.innerHTML = `<div class="col-span-full text-center py-12"><i class="fas fa-spinner fa-spin text-5xl text-[#f0c856]"></i><p class="mt-6">Loading from OpenSea...</p></div>`;
+
+            try {
+                const res = await fetch(`https://api.opensea.io/api/v2/collection/fallen-angels-mechfallen/nfts?limit=50&t=${Date.now()}`, {
+                    headers: { "X-API-KEY": API_KEY }
+                });
+                const data = await res.json();
+
+                const count = data.nfts ? data.nfts.length : 0;
+                countEl.textContent = `${count} PIECES DISPLAYED`;
+                if (totalEl) totalEl.textContent = count;
+
+                grid.innerHTML = data.nfts.map(nft => `
+                    <div class="card bg-[#111122] border border-[rgba(212,164,34,0.1)] rounded-xl overflow-hidden cursor-pointer" onclick="openModal(this)">
+                        <div class="relative">
+                            <img src="${nft.image_url}" class="w-full aspect-square object-cover">
+                            <div class="absolute top-3 right-3 bg-black/70 text-[#f0c856] text-xs px-3 py-1 rounded-full">#${nft.identifier}</div>
+                            <div class="absolute bottom-3 left-3 flex gap-2">
+                                <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'x')" class="bg-black/70 hover:bg-white hover:text-black p-2 rounded-full"><i class="fab fa-x-twitter"></i></button>
+                                <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'facebook')" class="bg-black/70 hover:bg-white hover:text-black p-2 rounded-full"><i class="fab fa-facebook"></i></button>
+                                <button onclick="event.stopImmediatePropagation(); shareNFT('${nft.name || `MechFallen #${nft.identifier}`}', '${nft.permalink}', 'telegram')" class="bg-black/70 hover:bg-white hover:text-black p-2 rounded-full"><i class="fab fa-telegram"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-medium">${nft.name || `MechFallen #${nft.identifier}`}</h3>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">OpenSea API is slow.<br>Ctrl + Shift + R</div>`;
+            }
+        }
+
+        function toggleShareMenu() {
+            document.getElementById('share-menu').classList.toggle('active');
+        }
+
+        function shareTo(network) {
+            const url = "https://galleries-three.vercel.app";
+            const text = "Discover Fallen Angels: MechFallen – my cyber-gothic NFT collection 🔥 @skylme";
+            const urls = {
+                x: `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+                telegram: `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
+                whatsapp: `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`
+            };
+            if (urls[network]) window.open(urls[network], '_blank');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText("https://galleries-three.vercel.app").then(() => alert("✅ Lien copié !"));
+        }
+
+        function shareNFT(name, link, network) {
+            const text = `Just discovered "${name}" in the MechFallen collection 🔥 @skylme`;
+            const urls = {
+                x: `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`,
+                telegram: `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`
+            };
+            if (urls[network]) window.open(urls[network], '_blank');
+        }
+
+        function openModal(el) {
+            alert("NFT clicked – modal coming soon");
+        }
+
+        window.onload = loadNFTs;
+    </script>
+</body>
+</html>
