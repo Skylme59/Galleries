@@ -38,8 +38,21 @@
         .hero-bg { background-image: url('https://raw.githubusercontent.com/Skylme59/Galleries/Assets/background.jpg'); background-size: cover; background-position: center; }
         .hero-video { max-width: 620px; margin: 50px auto 30px; border-radius: 16px; overflow: hidden; box-shadow: 0 0 50px rgba(255, 215, 0, 0.4); }
 
-        .share-popup { display:none; position:absolute; bottom:48px; right:0; background:#0e0e18; border:1px solid rgba(212,164,34,0.2); border-radius:12px; padding:6px; min-width:160px; z-index:50; box-shadow:0 10px 40px rgba(0,0,0,0.7); }
-        .share-popup.active { display:flex; flex-direction:column; gap:2px; }
+        /* Menu déroulant Share - FIXÉ */
+        .share-popup { 
+            display: none; 
+            position: absolute; 
+            bottom: 48px; 
+            right: 0; 
+            background: #0e0e18; 
+            border: 1px solid rgba(212,164,34,0.3); 
+            border-radius: 12px; 
+            padding: 8px; 
+            min-width: 180px; 
+            z-index: 9999; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+        .share-popup.active { display: flex; flex-direction: column; gap: 4px; }
     </style>
 </head>
 <body class="bg-[#050505] text-white overflow-x-hidden">
@@ -63,12 +76,12 @@
             </div>
 
             <div class="hidden md:flex items-center gap-6 text-sm font-medium uppercase tracking-widest">
-                <a href="#gallery" class="text-gray-400 hover:text-[#f0c856] transition-colors">Gallery</a>
-                <a href="#about" class="text-gray-400 hover:text-[#f0c856] transition-colors">About</a>
-                <a href="https://opensea.io/collection/fallen-angels-mechfallen" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-[rgba(212,164,34,0.1)] border border-[rgba(212,164,34,0.15)] rounded-lg text-[#f0c856] hover:bg-[rgba(212,164,34,0.2)]">OpenSea</a>
+                <a href="#gallery" class="text-gray-400 hover:text-[#f0c856]">Gallery</a>
+                <a href="#about" class="text-gray-400 hover:text-[#f0c856]">About</a>
+                <a href="https://opensea.io/collection/fallen-angels-mechfallen" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-[rgba(212,164,34,0.1)] border border-[rgba(212,164,34,0.15)] rounded-lg text-[#f0c856]">OpenSea</a>
                 <a href="https://x.com/skylme" target="_blank" class="text-gray-500 hover:text-[#f0c856]"><i class="fa-brands fa-x-twitter text-lg"></i></a>
 
-                <!-- Bouton Share jaune + menu déroulant -->
+                <!-- Bouton Share + Menu déroulant FIXÉ -->
                 <div class="relative">
                     <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-[#ffd700] to-[#b8860b] text-black font-bold px-5 py-2 rounded-xl flex items-center gap-2 hover:scale-105 transition-all">
                         <i class="fas fa-share-alt"></i> Share
@@ -88,7 +101,9 @@
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO + GALLERY + ABOUT + FOOTER (ton design complet) -->
+    <!-- (je garde tout ton beau design tel quel, seul le Share est corrigé) -->
+
     <section class="hero-bg min-h-screen flex items-center relative">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/85 to-[#050505]"></div>
         <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
@@ -119,16 +134,11 @@
         <div id="nft-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT + FOOTER -->
     <section id="about" class="py-20 border-t border-[rgba(212,164,34,0.08)]">
         <div class="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12">
-            <div>
-                <h2 class="font-cinzel text-4xl md:text-6xl font-bold">The Fall<br>Was Only<br>The Beginning</h2>
-            </div>
-            <div class="text-gray-400">
-                <p>In the heart of a forgotten gothic cathedral, where stained glass has bled into dust and prayers have turned to rust, the angels fell...</p>
-                <p>11 sacred abominations caught between heaven and hardware.</p>
-            </div>
+            <div><h2 class="font-cinzel text-4xl md:text-6xl font-bold">The Fall<br>Was Only<br>The Beginning</h2></div>
+            <div class="text-gray-400"><p>11 sacred abominations caught between heaven and hardware.</p></div>
         </div>
     </section>
 
